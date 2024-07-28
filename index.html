@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="https://amwcdn.com/featured/282835/responsive-images/37194ab46d___full-webp_709_494.webp" property="og:image"></meta>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:image" content="https://amwcdn.com/featured/282835/responsive-images/37194ab46d___full-webp_709_494.webp"/>
+  <meta property="og:title" content="this is First Title"/>
+  <meta property="og:description" content="this is slogan title"/>
+  <meta property="og:url" content="https://amwaly.com"/>
+  <meta property="og:type" content="website"/>
+  
+  <meta property="og:image:alt" content="A description of the image"/>
   <title><data:blog.pageTitle/></title>
   <b:include name='blog-meta-data'/>
   <style>
@@ -23,6 +31,13 @@
       font-size: 2em;
     }
 
+    .loader-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
     .loader {
       border: 16px solid #f3f3f3; /* Light grey */
       border-top: 16px solid #3498db; /* Blue */
@@ -30,26 +45,55 @@
       width: 120px;
       height: 120px;
       animation: spin 2s linear infinite;
-      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      font-size: 2em;
+      animation: fade 1s infinite;
     }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    @keyframes fade {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      let timerElement = document.createElement('div');
+      timerElement.className = 'timer';
+      timerElement.id = 'timer';
+      document.querySelector('.loader-container').appendChild(timerElement);
+      
+      let timeLeft = 10;
+      timerElement.textContent = timeLeft;
+
+      let countdown = setInterval(() => {
+        if (timeLeft > 0) {
+          timeLeft--;
+          timerElement.textContent = timeLeft;
+        } else {
+          clearInterval(countdown);
+        }
+      }, 1000);
+
       setTimeout(function() {
         window.location.href = "https://bit.ly/canvaproteamlink01";
-      }, 10000);  // Delay of 3000 milliseconds (3 seconds)
+      }, 5000);  // Delay of 10000 milliseconds (10 seconds)
     });
   </script>
 </head>
 <body>
   <div>
     <h1>please wait - برجاء الانتظار</h1>
-    <div class="loader"></div>
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
   </div>
 </body>
 </html>
